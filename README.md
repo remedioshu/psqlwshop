@@ -1,2 +1,3 @@
 # psqlwshop
-Postgresql Workshop
+Postgresql Workshop 1.0
+
