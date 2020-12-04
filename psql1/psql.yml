@@ -1,0 +1,35 @@
+version: "3"
+services:
+  psql1:
+    image: postgres:10
+    ports:
+      - "15432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    # tartos docker volume becsatolasa a kontenerbe
+    volumes:
+      - "pgdata1:/var/lib/postgresql/data"
+    networks:
+      testnet:
+  # pgadmin:
+  pgadmin:
+    image: dpage/pgadmin4:4.28
+    ports:
+      - "5080:80"
+    environment:
+      PGADMIN_LISTEN_PORT: 80
+      PGADMIN_DEFAULT_EMAIL: admin@test
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    # docker exec -it psql1_pgadmin_1 python setup.py --user admin@test --dump-servers /tmp/server.json
+    # docker exec psql1_pgadmin_1 cat  /tmp/server.json > /tmp/server.json
+    # volumes:
+    #  - "/tmp/server.json:/pgadmin4/server.json" 
+    networks:
+      testnet:
+# uj halozat letrehozasa
+networks:
+  testnet:
+# tartos docker volume letrehozasa
+volumes:
+  pgdata1:
